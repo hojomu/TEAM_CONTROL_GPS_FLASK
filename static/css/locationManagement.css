@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 1200px;
+	height: 80px;
+	background-color: #eaf4f3;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+		
+#contentsWrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 120px);
+	width:100%;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding:10px;
+	margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+	#contentsWrap {
+		flex-direction: row;
+		width:1200px;
+		height:800px;
+	}
+	#contentsWrap > div {
+		width: 50%;
+		height: 100%;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	header {
+		width: 100%;
+	}
+
+	#contentsWrap {
+		width: 100%;
+		height: 100vh;
+	}
+	
+	#contentsWrap > div {
+		width: 100%;
+		height: 50%;
+	}
+	
+	#customerList {
+		border-bottom: 1px solid #ccc;
+	}
+}
+
+#listWrap{
+	display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       width:40%;
+       height:100%;
+}
+
+#searchBox{
+	display: flex;
+       justify-content: center;
+       align-items: center;
+       width:100%;
+       padding:10px 5px;
+       border-bottom: 1px solid #ccc;
+}
+
+#customerList{
+	flex: 1;
+      	height:100%;
+      	width:100%;
+      	overflow-y: auto;
+      	padding:10px 5px;
+}
+
+#mapWrap{
+	width:60%;
+	height:100%;
+	padding:15px;
+}
+
+/* 툴팁마커 css */
+.node {
+    position: absolute;
+    background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/sign-info-64.png);
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+}
+
+.tooltip {
+    background-color: #fff;
+    position: absolute;
+    border: 2px solid #333;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 3px 5px 0;
+    left: 65px;
+    top: 14px;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: none;
+}
+
+.tracker {
+    position: absolute;
+    margin: -35px 0 0 -30px;
+    display: none;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.icon {
+    position: absolute;
+    left: 6px;
+    top: 9px;
+    width: 48px;
+    height: 48px;
+    background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/sign-info-48.png);
+}
+
+.balloon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/balloon.png);
+    -ms-transform-origin: 50% 34px;
+    -webkit-transform-origin: 50% 34px;
+    transform-origin: 50% 34px;
+}
+
+.patientName {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 6px 0 6px 10px;
+	font-size: 15px;
+	margin-bottom: 3px;
+}
+
+/* 컴포넌트 감추기용 disnone */
+.initial-disnone{
+	display:none;
+}
+
+.disnone{
+	display:none;
+}
+
+
+
+
