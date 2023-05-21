@@ -375,7 +375,7 @@ function getFocusLocation(props){
 		}
 	}
 	
-	$.getJSON("/focusToPatient/"+props.name+"/"+props.phone+".json",function(data){
+	$.getJSON("/focusToPatient/"+props.name+"/"+props.phone,function(data){
 		console.log(data);
 		
 		//마커 옵션
@@ -383,10 +383,10 @@ function getFocusLocation(props){
 		var focusedMarkerImage = new kakao.maps.MarkerImage(focusedImageSrc, focusedImageSize);
 		
 		position = {
-				title: data.name,
-				latlng: new kakao.maps.LatLng(data.x, data.y)
+				title: data[0].name,
+				latlng: new kakao.maps.LatLng(data[0].x, data[0].y)
 		};
-		
+
 		// 마커 생성 ( 지속적으로 생성되야함 )
 		var focusedMarker = new kakao.maps.Marker({
 	        map: map, // 마커를 표시할 지도
@@ -441,7 +441,7 @@ function makeMarkers(hospital){
 	console.log("trackerElements : "+trackerElements);
 	
 	// 병원 이름을 바탕으로 환자 정보를 불러오고, 환자 정보를 바탕으로 위치 데이터를 받아와야한다.
-	$.getJSON("/getLocationData/"+hospital+".json",function(data){
+	$.getJSON("/getLocationData/"+hospital,function(data){
 		console.log(data);
 		
 		let markerTrackers = [];
@@ -480,7 +480,7 @@ const hospitalNameBox = document.getElementById('hospitalNameBox');
 function getPatientInfo(hospital){
 	hospitalNameBox.innerText = hospital;
 	// 병원 이름을 바탕으로 환자 정보를 불러오고, 환자 정보를 바탕으로 위치 데이터를 받아와야한다.
-	$.getJSON("/getPatientsData/"+hospital+".json",function(data){
+	$.getJSON("/getPatientsData/"+hospital,function(data){
 		console.log(data);
 		
 		let str = "";

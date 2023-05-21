@@ -64,11 +64,14 @@ $(function() {
         );
       };
   
-      let interval;
+      let interval = null;
   
       $('#btnStart').click(function() {
+        if(interval){
+          clearInterval(interval);
+        }
         getPosition();
-        interval = setInterval(getPosition, 1000); // 1초에 한번 씩 위치 정보 전달
+        interval = setInterval(getPosition, 5000); // 5초에 한번 씩 위치 정보 전달
       }); 
   
       $('#btnStop').click(function() {
