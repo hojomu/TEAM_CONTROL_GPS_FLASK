@@ -9,10 +9,6 @@ var options = { //지도를 생성할 때 필요한 기본 옵션
 	level: 3 //지도의 레벨(확대, 축소 정도)
 };
 
-const apiUrl = "https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList";
-const serviceKey = "h2ypgTwYrtNcvQ3ZsS%2B5Nz0kFSgTSkQWd1FXJYNRncmkSaVyPtpiFz5R3qxWUQwBIWuAdRKDI2his%2FECaRPniA%3D%3D";
-const numOfRows = 1500; // 한 번에 가져올 데이터 개수
-
 // 집중 환자 마커 이미지
 var focusedImageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
@@ -564,82 +560,37 @@ function hospitalClick(event){
 		//let initDisnones = document.querySelectorAll('.initial-disnone');
 		let hospitalCheckBox = document.querySelector('#hospitalCheck');
         let hospitalListBox = document.querySelector('#hospitalListBox');
-        var cityData = document.getElementById('cityDataSelect').value;
-		let hospital = document.getElementById('hospital').value;
-        console.log(hospital);
 
-        hosLi = "";
+		let hospital = document.getElementById('hospital').value;
 
         // api에서 병원 정보 불러오기
-        $.ajax({
-            type:'GET',
-            dataType:'JSON',
-            url:`${apiUrl}?ServiceKey=${serviceKey}&numOfRows=${numOfRows}&pageNo=1&sidoCd=${cityData}`,
-            error: function(err){
-                console.log(err);
-            },
-            success: function(data){
-                console.log(data);
-                var items = data.response.body.items.item;
-                console.log(items[0].yadmNm)
-
-                for (let i = 0; i < items.length; i++){
-                    if (items[i].yadmNm.includes(hospital)){
-                        hosLi += "<li class='hospitalName' data-x='"+items[i].XPos+"' data-y='"+items[i].YPos+"' data-key='"+items[i].yadmNm+"'>"+items[i].yadmNm+"</li>"
-                    }
-                }
-            
-            $("#hospitalList").html(hosLi);
-
-            // 이벤트 부여해서 맵 띄우기
-
-            }
-        })
-
-        console.log(hosLi);
-
+		$.getJSON("/getHospitalData/"+hospital,function(data){
+		console.log(data);
+		
+		let str = "";
+		
+		// 받아온 데이터 for 문
+		for(let i = 0; i < data.length; i++){
+			// 병원 리스트 생성
+			str+="<li class='hospitalName' data-key='"+data[i].hospitalName+"'>"+data[i].hospitalName+" - 주소 : "+data[i].addr+"</li>"
+		}
+		
+		$("#hospitalList").html(str);
+		
+		$(document).on("click",".hospitalName",hospitalClick);
+		
+	    })
 		
 		hospitalCheckBox.classList.add('disnone');
 		hospitalListBox.classList.remove('initial-disnone');
 
-		//getHospitalInfo(hospital); // 병원에 대한 정보 입력 ex) 병원이름
-		//makeMarkers(hospital); // 5초 인터벌 없이 마커 생성
+		getHospitalInfo(hospital); // 병원에 대한 정보 입력 ex) 병원이름
+		makeMarkers(hospital); // 5초 인터벌 없이 마커 생성
 		
 	})
 	
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-
-const cityData = [
-    { sidoCd:"110000", sidoCdNm:"서울"},
-    { sidoCd:"210000", sidoCdNm:"부산"},
-    { sidoCd:"220000", sidoCdNm:"인천"},
-    { sidoCd:"230000", sidoCdNm:"대구"},
-    { sidoCd:"240000", sidoCdNm:"광주"},
-    { sidoCd:"250000", sidoCdNm:"대전"},
-    { sidoCd:"310000", sidoCdNm:"경기"},
-    { sidoCd:"320000", sidoCdNm:"강원"},
-    { sidoCd:"330000", sidoCdNm:"충북"},
-    { sidoCd:"340000", sidoCdNm:"충남"},
-    { sidoCd:"350000", sidoCdNm:"전북"},
-    { sidoCd:"360000", sidoCdNm:"전남"},
-    { sidoCd:"370000", sidoCdNm:"경북"},
-    { sidoCd:"380000", sidoCdNm:"경남"},
-    { sidoCd:"390000", sidoCdNm:"제주"},
-    { sidoCd:"410000", sidoCdNm:"세종시"},
-]
-
-// 도시 리스트 불러오기
-window.addEventListener('load', function () {
-    var cityDataSelect = document.getElementById('cityDataSelect');
-    
-    option = "<option disabled selected>지역을 선택 해주세요</option>";
-    option += "<option value='260000'>울산</option>";
-    for (let i = 0; i < cityData.length; i++){
-        option += "<option disabled value="+cityData[i].sidoCd+">"+cityData[i].sidoCdNm+"</option>"
-    }
-
-    cityDataSelect.innerHTML = option;
-
-});
+	
+	
 
 	
