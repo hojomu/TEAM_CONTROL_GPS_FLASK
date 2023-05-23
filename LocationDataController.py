@@ -52,7 +52,9 @@ def get_location_data(hospital):
 @LocationDataController.route('/focusToPatient/<name>/<phone>')
 def get_focused_patient_location(name,phone):
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM locationdata WHERE name = %s AND phone = %s AND getTime = ( SELECT MAX(getTime) FROM locationdata WHERE name = %s AND phone = %s )", (name,phone,name,phone,))
+    cur.execute("""SELECT * FROM locationdata 
+                WHERE name = %s AND phone = %s AND getTime = ( SELECT MAX(getTime) 
+                FROM locationdata WHERE name = %s AND phone = %s )""", (name,phone,name,phone,))
     data = cur.fetchall()
     cur.close()
 

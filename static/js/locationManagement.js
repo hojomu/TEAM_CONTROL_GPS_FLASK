@@ -492,7 +492,7 @@ function getPatientInfo(hospital){
 		// 받아온 데이터 for 문
 		for(let i = 0; i < data.length; i++){
 			// 환자 리스트 생성
-			str+="<li class='patientName' data-key='"+data[i].phone+"'>"+data[i].name+"</li>"
+			str+="<li class='patientName' data-key='"+data[i].phone+"' data-hospital='"+data[i].hospital+"'>"+data[i].name+"</li>"
 		}
 		
 		$("#customerListUl").html(str);
