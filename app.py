@@ -58,15 +58,3 @@ if __name__ == '__main__':
 
 
 
-# db insert 예제 ( 삭제 예정 )
-# @app.route('/insert', methods=['POST'])
-# def insert_data():
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         # 여기에서 필요한 데이터를 받아온 후 MySQL 데이터베이스에 삽입하는 쿼리를 실행합니다.
-#         cur = mysql.connection.cursor()
-#         cur.execute("INSERT INTO register (name) VALUES (%s)", (name,))
-#         mysql.connection.commit()
-#         cur.close()
-#         return 'Data inserted successfully'
-#     return render_template('insert.html')
