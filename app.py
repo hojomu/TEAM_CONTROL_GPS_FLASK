@@ -25,7 +25,7 @@ mysql = MySQL(app)
 app.register_blueprint(GeolcationController)
 app.register_blueprint(MedicalMemberController)
 app.register_blueprint(LocationDataController)
-
+app.register_blueprint(HomeLEDController)
 
 @app.route('/')
 def index():
@@ -50,11 +50,25 @@ def member():
 def a():
     KAKAOMAP_API_KEY = app.config['KAKAOMAP_API_KEY']
     return render_template('a.html', KAKAOMAP_API_KEY = KAKAOMAP_API_KEY)
+
+@app.route('/homeLED')
+def homeLED():
+    return render_template('homeLED.html')
 # 이동용 route 끝
 
 
 if __name__ == '__main__':
     app.run()
 
-
-
+# db insert 예제 ( 삭제 예정 )
+# @app.route('/insert', methods=['POST'])
+# def insert_data():
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         # 여기에서 필요한 데이터를 받아온 후 MySQL 데이터베이스에 삽입하는 쿼리를 실행합니다.
+#         cur = mysql.connection.cursor()
+#         cur.execute("INSERT INTO register (name) VALUES (%s)", (name,))
+#         mysql.connection.commit()
+#         cur.close()
+#         return 'Data inserted successfully'
+#     return render_template('insert.html')

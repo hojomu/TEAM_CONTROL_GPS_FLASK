@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>GPIO TEST</title>
+    <!-- SweetAlert CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.css">
+
+<!-- SweetAlert JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.2/dist/sweetalert2.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert 라이브러리 -->
+    <script src="//cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Axios 라이브러리 -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jQuery 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/event-source-polyfill/1.0.8/eventsource.min.js"></script> <!-- EventSource 폴리필 -->
+    <!-- JavaScript 코드 시작 -->
+    <style>
+        body {font-size:120%;}
+        #main {display: table; margin: auto;  padding: 0 10px 0 10px; }
+        .button { padding:5px 5px 5px 5px; width:100%; font-size: 120%;}
+        #but1 { background-color: mistyrose; }
+        #but2 { background-color: honeydew; }
+    </style>
+    <script>
+        function showNotification() {
+            alert("비콘과 모바일 기기가 연결되었습니다.");
+        }
+
+    // 블루투스 연결 상태 확인을 위한 이벤트 리스너 등록
+    window.addEventListener('bluetoothconnectionchange', function(event) {
+        if (!event.currentTarget.connected) {
+            // 블루투스 연결이 끊어진 경우 웹 페이지를 닫음
+            window.close();
+        }
+    });
+
+    // 블루투스 연결 상태 모니터링 시작
+    navigator.bluetooth.addEventListener('advertisementreceived', function(event) {
+        // 블루투스 광고를 수신하여 연결 상태를 확인
+        var connected = event.currentTarget.connected;
+        // 블루투스 연결 상태를 웹 서버로 전송하여 처리할 수도 있음
+        // 예: Ajax 요청 등을 사용하여 서버에 연결 상태를 전달
+
+        // 연결 상태를 웹 페이지에 표시하거나 필요한 작업 수행
+        console.log("Bluetooth Connection Status:", connected);
+
+        if (!connected) {
+            // 블루투스 연결이 끊어진 경우 알림 메시지 출력 후 웹 페이지를 닫음
+            Swal.fire({
+                title: '블루투스 연결 끊김',
+                text: '블루투스 연결이 끊어졌습니다.',
+                icon: 'warning',
+                showConfirmButton: false,
+                timer: 2000  // 2초 후에 창이 자동으로 닫힘
+            }).then(function() {
+                window.close();
+            });
+        }
+    });
+
+        // 블루투스 연결 상태 모니터링 시작
+        navigator.bluetooth.addEventListener('advertisementreceived', function(event) {
+            // 블루투스 광고를 수신하여 연결 상태를 확인
+            var connected = event.currentTarget.connected;
+            // 블루투스 연결 상태를 웹 서버로 전송하여 처리할 수도 있음
+            // 예: Ajax 요청 등을 사용하여 서버에 연결 상태를 전달
+
+            // 연결 상태를 웹 페이지에 표시하거나 필요한 작업 수행
+            console.log("Bluetooth Connection Status:", connected);
+        });
+    </script>
+</head>
+<body>
+  <div id='main'>
+   <h2>웹서버 GPIO 제어</h2>
+    {% for pin in pins %}
+   <p>The {{ pins[pin].name }}
+   {% if pins[pin].state == True %}
+      <a href="/{{pin}}/off"><button id='but1'>끄기</button></a>
+   {% else %}
+      <a href="/{{pin}}/on" onclick="showNotification()"><button id='but2'>켜기</button></a>
+   {% endif %}
+   </p>
+   {% endfor %}
+  </div>
+</body>
+</html>
