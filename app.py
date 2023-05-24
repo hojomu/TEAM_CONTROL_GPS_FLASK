@@ -3,7 +3,6 @@ from flask_mysqldb import MySQL
 from GeolcationController import GeolcationController
 from MedicalMemberController import MedicalMemberController
 from LocationDataController import LocationDataController
-from homeLED import homeLED
 import config
 
 app = Flask(__name__)
@@ -26,7 +25,6 @@ mysql = MySQL(app)
 app.register_blueprint(GeolcationController)
 app.register_blueprint(MedicalMemberController)
 app.register_blueprint(LocationDataController)
-app.register_blueprint(homeLED)
 
 @app.route('/')
 def index():
