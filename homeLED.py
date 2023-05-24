@@ -1,24 +1,14 @@
-#-*-coding:utf-8-*-
-
-
-
-# 필요한 라이브러리를 불러옵니다. 
-
 import RPi.GPIO as GPIO
 
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-
-
 # 불필요한 warning 제거,  GPIO핀의 번호 모드 설정
 
 GPIO.setwarnings(False)  
 
 GPIO.setmode(GPIO.BCM)
-
-
 
 # pins란 딕셔너리를 만들고 GPIO 22, 23, 24 핀을 저장합니다.
 
@@ -31,8 +21,6 @@ pins = {
    25 : {'name' : 'Green LED', 'state' : GPIO.LOW}
 
 }
-
-
 
 # pins 내에 있는 모든 핀들을 출력으로 설정하고 초기 LED OFF 설정
 
