@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.main_button{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 200px;
+}
+
+button {
+    background-color: rgb(95, 168, 242);
+    color: white;
+    font-size: 25px;
+    border-radius: 20px;
+    border-color: white;
+    width: 250px;
+    height: 100px;
+    margin: 0 15px 25px;
+
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgb(68, 133, 197);
+}

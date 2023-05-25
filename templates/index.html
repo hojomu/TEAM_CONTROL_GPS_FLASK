@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Flask Template</title>
-</head>
-<body>
-    <h1>Welcome to Flask!</h1>
-    <a href="/Geolocation">사용자위치 확인용</a>
-    <a href="/locationManagement">locationManagement 이동</a>
-    <a href="/a">a 이동</a>
-    <a href="/member">member 이동</a>
-    <a href="/homeLED">homeLED 이동</a>
+    <title>control team project</title>
 
-    <form method="POST" action="/insert">
+    <!-- index.css -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head> 
+<body>
+    <div class="main_button">
+        <button type="button" onclick="location.href='/Geolocation' " value="환자용">  환자용
+        <button type="button" onclick="location.href='/locationManagement' " value="병원용"> 병원용
+    </div>
+    
+    <!-- <a href="/a">a 이동</a> -->
+    <!-- <a href="/member">member 이동</a> -->
+
+    <!-- <form method="POST" action="/insert">
         <label for="name">이름</label>
         <input type="text" name="name" id="name">
         <button type="submit">제출</button>
-    </form>
+    </form> -->
+
 </body>
 </html>
