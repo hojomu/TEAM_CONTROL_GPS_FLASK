@@ -545,7 +545,6 @@ function hospitalClick(event){
     var hospitalMarkerImage = new kakao.maps.MarkerImage(hospitalImageSrc, hospitalImageSize);
     
 
-    // 마커 생성 ( 지속적으로 생성되야함 )
     var hospitalMarker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: hospitalLatLon, // 마커를 표시할 위치

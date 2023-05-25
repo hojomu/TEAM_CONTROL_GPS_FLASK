@@ -6,25 +6,6 @@ LocationDataController = Blueprint('LocationDataController',__name__)
 
 mysql = MySQL()
 
-# 병원의 환자 정보 불러오기
-@LocationDataController.route('/getPatientsData/<hospital>')
-def get_patients_data(hospital):
-    cur = mysql.connection.cursor()
-    cur.execute("select * from register where hospital = %s", (hospital,))
-    data = cur.fetchall()
-    cur.close()
-    
-    patients = []
-    for row in data:
-        patient = {
-            'name': row[0],
-            'phone': row[1]
-        }
-        patients.append(patient)
-    
-    return json.dumps(patients)
-
-
 # 환자 위치 정보 불러오기
 @LocationDataController.route('/getLocationData/<hospital>')
 def get_location_data(hospital):
@@ -42,7 +23,8 @@ def get_location_data(hospital):
         location = {
             'x': row[0],
             'y': row[1],
-            'name': row[2]
+            'phone': row[2],
+            'name': row[4]
         }
         location_data.append(location)
     
@@ -63,7 +45,8 @@ def get_focused_patient_location(name,phone):
         location = {
             'x': row[0],
             'y': row[1],
-            'name': row[2]
+            'phone': row[2],
+            'name': row[4]
         }
         location_data.append(location)
 
