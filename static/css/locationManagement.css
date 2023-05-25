@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+*{
+	margin: 0 auto;
+	padding: 0;
+}
+
+body, html {
+	height: 100%;
+  }
+
 ul, li {
 	margin: 0;
 	padding: 0;
@@ -16,7 +25,44 @@ header {
 	margin: 0 auto;
 	padding: 0 10px;
 }
+
+.hospital-search-box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    height: 100%;
+}
+
+#cityDataSelect{
+	width: 150px;
+    height: 34px;
+    border-radius: 5px;
+    border: solid 1px #000;
+}
+
+#hospital{
+	width: 200px;
+    height: 32px;
+    border-radius: 5px;
+    border: solid 1px #000;
+	padding-left: 5px;
+}
 		
+#hospital-check-btn{
+	font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 30px;
+    border-radius: 4px;
+    transition: 0.5s;
+    line-height: 1;
+    color: #fff;
+    background: #4492ff;
+    border: none;
+    margin: 5px;
+}
+
 #contentsWrap {
 	display: flex;
 	flex-direction: column;
